@@ -69,7 +69,7 @@ while ti <= tf
     % Wichtiger Hinweis: Die Parameter bei den Aufrufen von system_pt1(...) müssen unter Beachtung von jeweiligen Zeitpunkten bestimmt werden!
     
     % Berechnung des Zustands-Schätzwertes x(ti+h)
-    x(i+1) = x(i) + h/6 * (k1 + 4*k2 + k3);
+    x(i+1) = x(i) + h*k2;
 
     % Berechnung der LDF Fehlerabschätzung d(ti+h)
     d(i+1) = x(i + 1) - x(i) - h * y(i);
