@@ -5,7 +5,8 @@
 %
 % main_a1.m - Realisierung der VPG-Methode mit Fehlerschätzung
 % für PT1-Glied
-% zu ergänzende Codezeilen sind mit ">>> ergänzen ...." und ..."gekennzeichnet
+% zu ergänzende Codezeilen
+% sind mit ">>> ergänzen ...." und ..."gekennzeichnet test
 
 clear all % Lösche Arbeitsspeicher
 
