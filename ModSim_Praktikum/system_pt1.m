@@ -2,7 +2,7 @@
 %
 % Dr.-Ing. Th. Range, Dr.-Ing. E. Dueblenk
 %
-% edit: Johanna Krüger, Arne Noack, Viktor Strichow
+% edit: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
 %
 % zu ergänzende Codezeilen sind mit ">>> ergänzen ...." gekennzeichnet
 % Berechnung des Systems "PT1-Glied"
