@@ -35,7 +35,7 @@ while ti <= tf
     if ti < 1
         ys(i) = 0;
     elseif ti >= 1
-        ys(i) = 5 * (1 - exp(-1/Tm * ti));
+        ys(i) = 5 * (1 - exp(-1/Tm * (ti-1)));
     end
 
     % Berechnung des Stellwertes
@@ -69,10 +69,9 @@ while ti <= tf
     % Wichtiger Hinweis: Die Parameter bei den Aufrufen von system_pt1(...) müssen unter Beachtung von jeweiligen Zeitpunkten bestimmt werden!
     
     % Berechnung des Zustands-Schätzwertes x(ti+h)
-    x(i+1) = x(i) + h/6 * (k1 + 4*k2 + k3);
-
+    x(i+1) = x(i) + h*k2;
     % Berechnung der LDF Fehlerabschätzung d(ti+h)
-    d(i+1) = x(i + 1) - x(i) - h * y(i);
+    d(i+1) = x(i + 1) - x(i) - h * system_pt1( ti , x(i) , u(i) , 1);
     t(i) = ti; % Zeitwert für Plot speichern
     ti = ti + h; % Zeitvariable um einen Schritt erhöhen
     i = i + 1; % Index inkrementieren
@@ -82,6 +81,7 @@ d = d(1:end-1);
 result = [t;d];
 
 % Anzeige der Ergebnisse
+
 figure(1);
 subplot(2,1,1); plot(t,u); title('Eingang PT1-Glied');zoom on;grid on;
 subplot(2,1,2); plot(t,y); title('Ausgang PT1-Glied');zoom on;grid on;

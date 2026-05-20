@@ -35,8 +35,8 @@ elseif abs(flag) == 1 % Ausgabe der Ableitungen von x auf Vektor sys = x' = f(x(
     sys = (u - x) * 1/Tm;
 
 elseif flag == 3 % Ausgabe der Ausgangswerte des Systems auf Vektor sys: sys = y = g(x(t),u(t),t)
-    % sys = x;
-    sys = u * ( 1 - exp(-1/Tm * t));
+     sys = x;
+     % sys = u * ( 1 - exp(-1/Tm * t));
 
 else % bei anderen Flagwerten nichts ausgeben
     sys = [];
