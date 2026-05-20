@@ -71,7 +71,7 @@ while ti <= tf
     % Berechnung des Zustands-Schätzwertes x(ti+h)
     x(i+1) = x(i) + h*k2;
     % Berechnung der LDF Fehlerabschätzung d(ti+h)
-    d(i+1) = x(i + 1) - x(i) - h * system_pt1( ti , x(i) , u(i) , 1);
+    d(i+1) = h/6*(k1-2*k2+k3);
     t(i) = ti; % Zeitwert für Plot speichern
     ti = ti + h; % Zeitvariable um einen Schritt erhöhen
     i = i + 1; % Index inkrementieren
