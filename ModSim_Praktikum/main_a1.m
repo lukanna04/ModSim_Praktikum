@@ -71,7 +71,7 @@ while ti <= tf
     % Berechnung des Zustands-Schätzwertes x(ti+h)
     x(i+1) = x(i) + h*k2;
     % Berechnung der LDF Fehlerabschätzung d(ti+h)
-    d(i+1) = h/6*(k1-2*k2+k3);
+    d(i+1) = h/6*(k1-2*k2+k3); % ERKLÄRUNG: d springt an der Sprungstelle, da die k-Koeffizienten zu unterschiedlichen Zeitpunkten berechnet werden und ein k bereits den Sprung sieht und die anderen noch nicht.
     t(i) = ti; % Zeitwert für Plot speichern
     ti = ti + h; % Zeitvariable um einen Schritt erhöhen
     i = i + 1; % Index inkrementieren
