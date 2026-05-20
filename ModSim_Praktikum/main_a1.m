@@ -56,7 +56,7 @@ while ti <= tf
     else
         u_h = 5;
     end
- 
+
 
     % Berechnung des Ausgangswertes
     y(i) = system_pt1( ti , x(i) , u(i) , 3); %die Parameter einsetzen
@@ -67,7 +67,7 @@ while ti <= tf
     k3 = system_pt1( ti + h , x(i) - h*k1 + 2*h*k2 , u_h , 1); %die Parameter einsetzen
 
     % Wichtiger Hinweis: Die Parameter bei den Aufrufen von system_pt1(...) müssen unter Beachtung von jeweiligen Zeitpunkten bestimmt werden!
-    
+
     % Berechnung des Zustands-Schätzwertes x(ti+h)
     x(i+1) = x(i) + h*k2;
     % Berechnung der LDF Fehlerabschätzung d(ti+h)
