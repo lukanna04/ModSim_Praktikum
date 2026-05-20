@@ -1,12 +1,7 @@
 % MODSIM Laborpraktikum
 %
 % sys_top.m
-% Systemtopologie für:
-%
-% u2 ---> Subtraktionsstelle ---> Hysterese ---> y
-%              ^                                |
-%              |                                |
-%              -------- PT1-Glied <-------------
+% Systemtopologie
 %
 % Zustand x:
 % x(1) = Zustand des PT1-Gliedes
