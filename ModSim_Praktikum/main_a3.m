@@ -16,7 +16,6 @@ clc;
 global h_e h_a
 global hys_akt hys_save
 
-% >>> Falls in deiner Aufgabenstellung andere Werte stehen, hier ändern!
 h_e = 0.085;
 h_a = 0.065;
 
