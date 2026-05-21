@@ -26,7 +26,7 @@ global hys_akt hys_save
 h_e = 0.085;
 h_a = 0.065;
 
-u2_werte = [0.17, -0.25, 0.45];
+u2_werte = [0.17, -0.25, 0.49];
 
 for exp = 1:length(u2_werte)
 
