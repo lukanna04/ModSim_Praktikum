@@ -11,8 +11,9 @@ clear all % Lösche Arbeitsspeicher
 
 Tm = 10; % Konstante des PT1, s
 
-h = 0.1; % Schrittweite, s
-
+h = 0.1; % Schrittweite, s 
+h_max = 20;
+h_min = 60*10^(-6);
 t0 = 0; % Integrationsbeginn, s
 tf = 300; % Integrationsende, s
 
@@ -21,6 +22,7 @@ d = []; % Fehler-Schätzwerte
 u = []; % Stellwerte u(t)
 y = []; % Ausgangswerte y(t)
 ys = []; % Soll-Ausgangswerte y_soll(t)
+h_v = []; % Schrittweitenwerte für Verifikation / Plot
 
 % Initialisierung
 [dum,x(1)] = system_pt1([],[],[],0);
@@ -56,7 +58,7 @@ while ti <= tf
     else
         u_h = 5;
     end
-
+ 
 
     % Berechnung des Ausgangswertes
     y(i) = system_pt1( ti , x(i) , u(i) , 3); %die Parameter einsetzen
@@ -67,14 +69,35 @@ while ti <= tf
     k3 = system_pt1( ti + h , x(i) - h*k1 + 2*h*k2 , u_h , 1); %die Parameter einsetzen
 
     % Wichtiger Hinweis: Die Parameter bei den Aufrufen von system_pt1(...) müssen unter Beachtung von jeweiligen Zeitpunkten bestimmt werden!
-
+    
     % Berechnung des Zustands-Schätzwertes x(ti+h)
     x(i+1) = x(i) + h*k2;
     % Berechnung der LDF Fehlerabschätzung d(ti+h)
-    d(i+1) = h/6*(k1-2*k2+k3); % ERKLÄRUNG: d springt an der Sprungstelle, da die k-Koeffizienten zu unterschiedlichen Zeitpunkten berechnet werden und ein k bereits den Sprung sieht und die anderen noch nicht.
+    d(i+1) = h/6*(k1-2*k2+k3); 
     t(i) = ti; % Zeitwert für Plot speichern
-    ti = ti + h; % Zeitvariable um einen Schritt erhöhen
-    i = i + 1; % Index inkrementieren
+    
+    %Berechnung des Verlaufs der Schrittweite
+    h_v(i) = h;
+
+    %Schrittweitensteuerung
+    
+    d_dach = max(abs(d(i+1)));
+    h_neu = h*(5*10^(-6)/d_dach)^(1/3);
+    %ERKLÄRUNG: h wird an der Sprungstelle klein, was nur dadurch erklärt
+    %werden kann, dass d an der Stelle groß wird, was durch die Schätzung
+    %nicht sichtbar ist.
+    %Algorithmus 
+    if h_neu > 2*h && h_neu < h_max
+        ti = ti + h; % Zeitvariable um einen Schritt erhöhen
+        h = h_neu;
+        i = i + 1; % Index inkrementieren
+    elseif h_neu <= h && h_neu > h_min
+        h = 0.75*h_neu;
+    else
+        ti = ti + h; % Zeitvariable um einen Schritt erhöhen
+        i = i + 1; % Index inkrementieren
+    end
+    
 end
 
 d = d(1:end-1);
@@ -91,4 +114,8 @@ figure(2);
 subplot(2,1,1); plot(t,y-ys,'.-'); title('GDF berechnet');zoom on;grid on;
 tit=sprintf('LDF geschätzt: max. Betrag = %g',max(abs(d)));
 subplot(2,1,2); plot(t,d,'.-'); title(tit);zoom on;grid on;
+xlabel('Zeit, s');
+
+figure(3);
+subplot(2,1,1); plot(t,h_v); title('Schrittweite h');zoom on;grid on;
 xlabel('Zeit, s');
