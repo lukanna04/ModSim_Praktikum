@@ -61,8 +61,8 @@ elseif flag == 3
     elseif e <= -h_e
         hys_akt = -1;
 
-    elseif e > -h_a && e < h_a
-        hys_akt = 0;
+    %elseif e > -h_a && e < h_a
+        %hys_akt = 0;
     end
 
     sys = hys_akt;

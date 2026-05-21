@@ -58,6 +58,12 @@ u2 = 0.17;
         e = speicher(1);
         y_s = speicher(2);
         y_m = speicher(3);
+
+        if e > -h_a && e < h_a
+            e = e_v(i-1);
+        else
+            e = e;
+        end
     
         % Plot Größen
         e_v(i) = e;
