@@ -10,13 +10,6 @@
 %
 % Berechnet:
 % e = u2 - y_m
-%
-% Eingang u:
-% u(1) = u2     konstante Eingangsgröße
-% u(2) = y_m    Rückführsignal vom PT1-Glied
-%
-% Ausgang:
-% sys = e
 
 function [sys, x0] = system_sub(t, x, u, flag)
 

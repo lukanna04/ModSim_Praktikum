@@ -35,7 +35,7 @@ elseif abs(flag) == 1
 
     u2 = u(1);
 
-    % Ausgang PT1-Glied = Rückführgröße
+    % Ausgang PT1-Glied 
     y_m = system_pt1(t, x, [], 3);
 
     % Subtraktionsstelle
@@ -44,7 +44,7 @@ elseif abs(flag) == 1
     % Hysterese
     y_h = system_hys(t, [], e, 3);
 
-    % PT1-Glied wird mit Ausgang der Hysterese gespeist
+    % PT1-Glied erhält Ausgang der Hysterese 
     sys = system_pt1(t, x, y_h, 1);
 
 elseif flag == 3

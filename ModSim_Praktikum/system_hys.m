@@ -5,20 +5,13 @@
 %
 % Hysterese
 %
-% Schaltverhalten:
-%
-% Ausgang y_h = +1, wenn e >= h_a
-% Ausgang y_h = -1, wenn e <= -h_e
-%
-% Dazwischen bleibt der vorherige Ausgangswert erhalten.
-%
 % Globale Variablen:
-% h_e             positive Schwelle für Umschalten nach -1
-% h_a             positive Schwelle für Umschalten nach +1
+% h_e             Schaltschwelle ein
+% h_a             Schaltschwelle aus
 % hys_akt       aktueller Zustand der Hysterese
 % hys_save  gespeicherter Zustand vor einem Integrationsschritt
 %
-% Spezielle flags:
+% flags:
 % flag = 4   Speicher sichern
 % flag = 5   Speicher wiederherstellen
 % flag = 6  Hysterese zurücksetzen

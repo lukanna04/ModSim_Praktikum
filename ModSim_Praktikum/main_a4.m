@@ -81,9 +81,7 @@ for exp = 1:length(u2_werte)
         
         d_dach = max(abs(d(i+1)));
         h_neu = h*(e_LDF/d_dach)^(1/3);
-        %ERKLÄRUNG: h wird an der Sprungstelle klein, was nur dadurch erklärt
-        %werden kann, dass d an der Stelle groß wird, was durch die Schätzung
-        %nicht sichtbar ist.
+        
         %Algorithmus 
         if h_neu > 2*h && h_neu < h_max
             ti = ti + h; % Zeitvariable um einen Schritt erhöhen

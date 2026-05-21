@@ -27,11 +27,7 @@ if flag == 0 % Ausgabe der Anfangswerte für den Zustand auf Vektor x0
     sys = [1,0,1,1,0,0]; % diese Zeile ist nur für Simulink nötig, sie gilt so NUR in diesem Beispiel!
 
 elseif abs(flag) == 1 % Ausgabe der Ableitungen von x auf Vektor sys = x' = f(x(t),u(t),t)
-    % G(s) = 1 / (1 + Tm*s)
-    % Y*Tm*s +Y = U 
-    % Zustandsdifferentialgleichung:
-    % y' = - 1/Tm * y + 1/Tm * u
-    % y -> x
+    
     sys = (u - x) * 1/Tm;
 
 elseif flag == 3 % Ausgabe der Ausgangswerte des Systems auf Vektor sys: sys = y = g(x(t),u(t),t)
