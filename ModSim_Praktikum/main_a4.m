@@ -111,8 +111,8 @@ u2 = 0.17;
     
     figure(1);
     % subplot(2,1,1); plot(t,u2); title('Eingang');zoom on;grid on;
-    subplot(2,1,1); plot(t,y); title('Ausgang');zoom on;grid on;
-    subplot(2,1,2); plot(t,e_v); title('Hysterese');zoom on;grid on;
+    subplot(2,1,1); plot(t,y); title('Hysterese');zoom on;grid on;
+    subplot(2,1,2); plot(t,e_v); title('sub');zoom on;grid on;
 
     xlabel('Zeit, s');
     
