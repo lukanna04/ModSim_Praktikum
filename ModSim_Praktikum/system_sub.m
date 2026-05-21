@@ -3,6 +3,11 @@
 % system_sub.m
 % Modul: Subtraktionsstelle
 %
+% MODSIM Laborpraktikum, 3. Aufgabe Schrittweitensteuerung
+% Prof. K. Janschek, Dr.-Ing. Th. Range, Dr.-Ing. E. Dueblenk
+%
+% edit: Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
+%
 % Berechnet:
 % e = u2 - y_m
 %

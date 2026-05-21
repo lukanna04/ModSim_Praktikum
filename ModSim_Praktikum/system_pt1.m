@@ -2,7 +2,7 @@
 %
 % Dr.-Ing. Th. Range, Dr.-Ing. E. Dueblenk
 %
-% edit: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
+% edit: Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
 %
 % zu ergänzende Codezeilen sind mit ">>> ergänzen ...." gekennzeichnet
 % Berechnung des Systems "PT1-Glied"
@@ -36,7 +36,6 @@ elseif abs(flag) == 1 % Ausgabe der Ableitungen von x auf Vektor sys = x' = f(x(
 
 elseif flag == 3 % Ausgabe der Ausgangswerte des Systems auf Vektor sys: sys = y = g(x(t),u(t),t)
      sys = x;
-     % sys = u * ( 1 - exp(-1/Tm * t));
 
 else % bei anderen Flagwerten nichts ausgeben
     sys = [];

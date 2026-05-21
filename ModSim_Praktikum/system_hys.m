@@ -1,9 +1,9 @@
-% MODSIM Laborpraktikum
+% MODSIM Laborpraktikum, 3. Aufgabe Schrittweitensteuerung
+% Prof. K. Janschek, Dr.-Ing. Th. Range, Dr.-Ing. E. Dueblenk
 %
-% system_hys.m
-% Modul: Hysterese
+% edit: Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
 %
-% Hysterese mit Gedächtnis.
+% Hysterese
 %
 % Schaltverhalten:
 %
@@ -43,11 +43,6 @@ if flag == 0
 
 elseif flag == 3
     % Ausgang der Hysterese berechnen
-
-    if isempty(h_e) || isempty(h_a)
-        error('Die globalen Variablen h_e und h_a müssen im Hauptprogramm gesetzt werden.');
-    end
-
     if isempty(hys_akt)
         hys_akt = -1;
     end

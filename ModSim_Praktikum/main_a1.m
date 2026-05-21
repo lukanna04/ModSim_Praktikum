@@ -1,7 +1,7 @@
 % MODSIM Laborpraktikum, 1. Aufgabe
 % Prof. K. Janschek, Dr.-Ing. Th. Range, Dr.-Ing. E. Dueblenk
 %
-% edit: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
+% edit: Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
 %
 % main_a1.m - Realisierung der VPG-Methode mit Fehlerschätzung
 % für PT1-Glied

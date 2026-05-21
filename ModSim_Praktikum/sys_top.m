@@ -1,6 +1,8 @@
-% MODSIM Laborpraktikum
+% MODSIM Laborpraktikum, 3. Aufgabe Schrittweitensteuerung
+% Prof. K. Janschek, Dr.-Ing. Th. Range, Dr.-Ing. E. Dueblenk
 %
-% sys_top.m
+% edit: Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
+%
 % Systemtopologie
 %
 % Zustand x:

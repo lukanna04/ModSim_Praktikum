@@ -1,7 +1,7 @@
-% MODSIM Laborpraktikum, 2. Aufgabe
+% MODSIM Laborpraktikum, 3. Aufgabe Schrittweitensteuerung
 % Prof. K. Janschek, Dr.-Ing. Th. Range, Dr.-Ing. E. Dueblenk
 %
-% edit: Johanna Krüger, Arne Noack, Viktor Strichow
+% edit: Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
 
 clear all % Lösche Arbeitsspeicher
 
@@ -29,12 +29,12 @@ global hys_akt hys_save
 h_e = 0.085;
 h_a = 0.065;
 
-% u2_werte = [0.17, -0.25, 0.45];
-u2 = -0.25;
+u2_werte = [0.17, -0.25, 0.45];
+% u2 = -0.25;
 
-% for exp = 1:length(u2_werte)
+for exp = 1:length(u2_werte)
 
-    % u2 = u2_werte(exp);
+    u2 = u2_werte(exp);
 
     % Initialisierung
     [dum,x(1)] = sys_top([],[],[],0);
@@ -109,20 +109,20 @@ u2 = -0.25;
     
     % Anzeige der Ergebnisse
     
-    figure(1);
+    figure('Name', sprintf('Experiment %d, u2 = %+g', exp, u2));
     % subplot(2,1,1); plot(t,u2); title('Eingang');zoom on;grid on;
     subplot(2,1,1); plot(t,y); title('Hysterese');zoom on;grid on;
-    subplot(2,1,2); plot(t,e_v); title('sub');zoom on;grid on;
+    subplot(2,1,2); plot(t,e_v); title('Ausgang Subtraktionsstelle');zoom on;grid on;
 
     xlabel('Zeit, s');
     
-    figure(2);
+    figure('Name', sprintf('Experiment %d, u2 = %+g', exp, u2));
     subplot(2,1,1); plot(t,ym_v,'.-'); title('Ausgang PT1');zoom on;grid on;
     tit=sprintf('LDF geschätzt: max. Betrag = %g',max(abs(d)));
     subplot(2,1,2); plot(t,d,'.-'); title(tit);zoom on;grid on;
     xlabel('Zeit, s');
     
-    figure(3);
+    figure('Name', sprintf('Experiment %d, u2 = %+g', exp, u2));
     subplot(2,1,1); plot(t,h_v); title('Schrittweite h');zoom on;grid on;
     xlabel('Zeit, s');
 
@@ -130,8 +130,8 @@ u2 = -0.25;
 
     tau_P = Tm * ( log((1 - (h_a / abs(u2))) / (1 - (h_e / abs(u2)))) - log(1 - (h_e - h_a) / (1 + h_e - abs(u2))));
 
+    fprintf('exp: %i \n', exp);
     fprintf('tau_e = %.6f s\n', tau_e);
     fprintf('tau_P = %.6f s\n', tau_P);
-
-    
-% end 
+   
+end 
