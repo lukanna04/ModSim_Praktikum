@@ -130,7 +130,7 @@ for exp = 1:length(u2_werte)
 
     tau_P = Tm * ( log((1 - (h_a / abs(u2))) / (1 - (h_e / abs(u2)))) - log(1 - (h_e - h_a) / (1 + h_e - abs(u2))));
 
-    fprintf('exp: %i \n', exp);
+    fprintf('Theoretische Werte für tau Exp: %i \n', exp);
     fprintf('tau_e = %.6f s\n', tau_e);
     fprintf('tau_P = %.6f s\n', tau_P);
    
