@@ -9,7 +9,8 @@ Tm = 10; % Konstante des PT1, s
 
 h = 0.1; % Schrittweite, s 
 h_max = 20;
-h_min = 60*10^(-6);
+h_min = 12*10^(-6);
+e_LDF = 1 * 10^(-6);
 t0 = 0; % Integrationsbeginn, s
 tf = 300; % Integrationsende, s
 
@@ -78,7 +79,7 @@ while ti <= tf
     %Schrittweitensteuerung
     
     d_dach = max(abs(d(i+1)));
-    h_neu = h*(5*10^(-6)/d_dach)^(1/3);
+    h_neu = h*(e_LDF/d_dach)^(1/3);
     %ERKLÄRUNG: h wird an der Sprungstelle klein, was nur dadurch erklärt
     %werden kann, dass d an der Stelle groß wird, was durch die Schätzung
     %nicht sichtbar ist.
