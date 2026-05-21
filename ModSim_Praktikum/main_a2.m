@@ -1,11 +1,7 @@
-% MODSIM Laborpraktikum, 1. Aufgabe
+% MODSIM Laborpraktikum, 2. Aufgabe Schrittweitensteuerung
 % Prof. K. Janschek, Dr.-Ing. Th. Range, Dr.-Ing. E. Dueblenk
 %
-% edit: Johanna Krüger, Arne Noack, Viktor Strichow
-%
-% main_a1.m - Realisierung der VPG-Methode mit Fehlerschätzung
-% für PT1-Glied
-% zu ergänzende Codezeilen sind mit ">>> ergänzen ...." und ..."gekennzeichnet
+% edit: Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow; Louise Perrin
 
 clear all % Lösche Arbeitsspeicher
 
