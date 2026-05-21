@@ -30,7 +30,7 @@ h_e = 0.085;
 h_a = 0.065;
 
 % u2_werte = [0.17, -0.25, 0.45];
-u2 = 0.17;
+u2 = -0.25;
 
 % for exp = 1:length(u2_werte)
 
@@ -58,12 +58,6 @@ u2 = 0.17;
         e = speicher(1);
         y_s = speicher(2);
         y_m = speicher(3);
-
-        if e > -h_a && e < h_a
-            e = e_v(i-1);
-        else
-            e = e;
-        end
     
         % Plot Größen
         e_v(i) = e;
@@ -132,9 +126,9 @@ u2 = 0.17;
     subplot(2,1,1); plot(t,h_v); title('Schrittweite h');zoom on;grid on;
     xlabel('Zeit, s');
 
-    tau_e = -Tm * log(1 - (h_e - h_a) / (1 + h_e - u2));
+    tau_e = -Tm * log(1 - (h_e - h_a) / (1 + h_e - abs(u2)));
 
-    tau_P = Tm * ( log((1 - (h_a / u2)) / (1 - (h_e / u2))) - log(1 - (h_e - h_a) / (1 + h_e - u2)));
+    tau_P = Tm * ( log((1 - (h_a / abs(u2))) / (1 - (h_e / abs(u2)))) - log(1 - (h_e - h_a) / (1 + h_e - abs(u2))));
 
     fprintf('tau_e = %.6f s\n', tau_e);
     fprintf('tau_P = %.6f s\n', tau_P);
