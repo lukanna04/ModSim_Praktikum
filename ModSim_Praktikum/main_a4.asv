@@ -8,8 +8,8 @@ clear all % Lösche Arbeitsspeicher
 Tm = 10; % Konstante des PT1, s
 
 h = 0.1; % Schrittweite, s 
-h_max = 20;
-h_min = 60*10^(-6);
+h_max = 1.567;
+h_min = 12*10^(-6);
 e_LDF = 1 * 10^(-6);
 t0 = 0; % Integrationsbeginn, s
 tf = 20; % Integrationsende, s
@@ -43,11 +43,11 @@ u2 = 0.17;
     % Integration nach VPG-Methode
     ti = t0;
     i = 1;
+
+    % Hysterese zurücksetzen
+    sys_top([], [], [], 6);
     
     while ti <= tf
-    
-        % Hysterese zurücksetzen
-        sys_top([], [], [], 6);
     
         % Anfangswert holen
         %[~, x0] = sys_top([], [], [], 0);
@@ -111,7 +111,7 @@ u2 = 0.17;
     
     figure(1);
     % subplot(2,1,1); plot(t,u2); title('Eingang');zoom on;grid on;
-    subplot(2,1,2); plot(t,y); title('Ausgang');zoom on;grid on;
+    subplot(2,1,1); plot(t,y); title('Ausgang');zoom on;grid on;
     subplot(2,1,2); plot(t,e_v); title('Hysterese');zoom on;grid on;
 
     xlabel('Zeit, s');
@@ -125,5 +125,13 @@ u2 = 0.17;
     figure(3);
     subplot(2,1,1); plot(t,h_v); title('Schrittweite h');zoom on;grid on;
     xlabel('Zeit, s');
+
+    tau_e = -Tm * log(1 - (h_e - h_a) / (1 + h_e - u2));
+
+    tau_P = Tm * ( log((1 - (h_a / u2)) / (1 - (h_e / u2))) - );
+
+    fprintf('tau_e = %.6f s\n', tau_e);
+    fprintf('tau_P = %.6f s\n', tau_P);
+
     
 % end 

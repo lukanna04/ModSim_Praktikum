@@ -30,14 +30,14 @@ tf = 20;
 h_start = 0.1;
 
 % Grenzen der Schrittweite
-h_max = 20.0;
-h_min = 60*10^(-6);
+h_max = 1.567;
+h_min = 12*10^(-6);
 
 % Fehlertoleranz lokaler Diskretisierungsfehler
-e_LDF = 5*10^(-6);
+e_LDF = 1*10^(-6);
 
 % Feste Schrittweite für Vergleich
-h_fest = 0.01;
+h_fest = 0.1;
 
 % Eingangswerte aus der Aufgabe
 u2_werte = [0.17, -0.25, 0.45];
@@ -354,9 +354,7 @@ function [tau_e, tau_P] = berechne_theorie(u2, Tm, h_e, h_a)
 
     tau_e = -Tm * log(1 - (h_e - h_a) / (1 + h_e - u2));
 
-    tau_a = -Tm * log(1 - (h_e - h_a) / (1 - h_a + u2));
-
-    tau_P = tau_e + tau_a;
+    tau_P = Tm * ( log((1 - (h_a / u2)) / (1 - (h_e / u2))) - log(1 - (h_e - h_a) / (1 + h_e - u2)));
 
 end
 
