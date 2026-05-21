@@ -17,8 +17,8 @@ u = []; % Stellwerte u(t)
 y = []; % Ausgangswerte y(t)
 ys = []; % Soll-Ausgangswerte y_soll(t)
 h_v = []; % Schrittweitenwerte für Verifikation / Plot
-e_v = [];
-ym_v = [];
+e_v = []; % Ausgang der Summationsstelle
+ym_v = []; % Ausgang des PT1
 
 global h_e h_a
 global hys_akt hys_save
@@ -27,7 +27,6 @@ h_e = 0.085;
 h_a = 0.065;
 
 u2_werte = [0.17, -0.25, 0.45];
-% u2 = -0.25;
 
 for exp = 1:length(u2_werte)
 
@@ -46,10 +45,6 @@ for exp = 1:length(u2_werte)
     
     while ti <= tf
     
-        % Anfangswert holen
-        %[~, x0] = sys_top([], [], [], 0);
-        %x = x0;
-    
         % Blockausgänge
         speicher = sys_top( ti , x(i) , u2 , 3);
         e = speicher(1);
@@ -59,7 +54,7 @@ for exp = 1:length(u2_werte)
         % Plot Größen
         e_v(i) = e;
         ym_v(i) = y_m;
-        y(i) = y_s; % oder y_v(i)
+        y(i) = y_s;
         t(i) = ti;
         h_v(i) = h;
     
