@@ -55,10 +55,14 @@ elseif flag == 3
     e = u(1);
 
     % Hysterese-Schaltlogik
-    if e >= h_a
+    if e >= h_e
         hys_akt = 1;
+
     elseif e <= -h_e
         hys_akt = -1;
+
+    elseif e > -h_a && e < h_a
+        hys_akt = 0;
     end
 
     sys = hys_akt;
