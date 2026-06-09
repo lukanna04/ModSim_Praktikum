@@ -83,6 +83,3 @@ H = inv(A) * (Phi - eye(3)) * B;
 
 disp(Phi);
 disp(H);
-
-modell = 'Signalflussplan2';
-load_system(modell);
