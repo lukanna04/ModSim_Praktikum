@@ -83,4 +83,6 @@ H = inv(A) * (Phi - eye(3)) * B;
 
 disp(Phi);
 disp(H);
+disp(C);
+disp(D);
 
