@@ -68,7 +68,7 @@ a3_nom = a3/a3;
 fprintf('a3_nom = %g\n', a3_nom);
 
 % Verifikation
-modell = 'Signalflussplan';
+modell = 'Signalflussplan2';
 load_system(modell);
 
 % Arbeitspunkt x = [0; 0], u = 0
