@@ -49,7 +49,7 @@ fprintf('\n');
 
 fprintf('Normierte Werte \n');
 
-K_F_nom = K_F / a3;
+K_F_nom = K_F / a3; % Normierung, sodass a3 = 1 ist, wie in MATLAB-Ausgabe
 fprintf('K_F_nom = %g\n', K_F_nom);
 
 a0_nom = 1/a3;
