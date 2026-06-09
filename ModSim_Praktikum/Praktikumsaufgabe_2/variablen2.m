@@ -31,7 +31,7 @@ mg  = m_g;        % Alias
 c_p = 75e6;
 cp  = c_p;        % Alias
 
-% Abtastrzeit
+% Abtastzeit
 Ta = 0.015;
 
 % Parameter der linearen Übertragungsfunktion
@@ -76,10 +76,11 @@ x0 = [0; 0; 0];
 u0 = 0;
 
 [A, B, C, D] = linmod(modell, x0, u0);
-
+% Berechnung der Transitionsmatrix 
 Phi = expm(A*Ta);
-
+%Berechnung der diskreten Eingangsmatrix
 H = inv(A) * (Phi - eye(3)) * B;
 
 disp(Phi);
 disp(H);
+
