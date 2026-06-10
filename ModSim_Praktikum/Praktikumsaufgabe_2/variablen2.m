@@ -31,6 +31,15 @@ mg  = m_g;        % Alias
 c_p = 75e6;
 cp  = c_p;        % Alias
 
+% Abtastrzeit
+Ta = 0.015;
+
+%Messglied
+KM = 1/63000;
+
+KI = 0.276;
+KI_krit = 2.21;
+
 % Parameter der linearen Übertragungsfunktion
 fprintf('Berechnete Werte \n');
 K_F = K_L * K_sv * b1;
@@ -65,7 +74,7 @@ a3_nom = a3/a3;
 fprintf('a3_nom = %g\n', a3_nom);
 
 % Verifikation
-modell = 'Signalflussplan2';
+modell = 'Signalflussplan';
 load_system(modell);
 
 % Arbeitspunkt x = [0; 0], u = 0
@@ -74,21 +83,39 @@ u0 = 0;
 
 [A, B, C, D] = linmod(modell, x0, u0);
 
-[b, a] = ss2tf(A, B, C, D);
+Phi = expm(A*Ta);
 
-fprintf('\n');
+H = inv(A) * (Phi - eye(3)) * B;
 
-fprintf('Simulierte Werte \n');
+disp(Phi);
+disp(H);
 
-fprintf('b = %s\n', mat2str(b, 6));
-fprintf('a = %s\n', mat2str(a, 6));
+modell = 'Signalflussplan2';
+load_system(modell);
 
-fprintf('\n');
+modell = 'I_Regler';
+load_system(modell);
 
-fprintf('Simulierte Parameter \n');
+[Aneu, Bneu, Cneu, Dneu] = dlinmod(modell, Ta);
 
-fprintf('K_F = %g\n', b(4));
-fprintf('a3 = %g\n', a(1));
-fprintf('a2 = %g\n', a(2));
-fprintf('a1 = %g\n', a(3));
-fprintf('a0 = %g\n', a(4));
+sys = ss(Aneu, Bneu, Cneu, Dneu, Ta);
+
+[mag, phase, w] = bode(sys);
+
+[Gm, Pm, wcg, wcp] = margin(mag, phase, w);
+
+bode(sys);
+
+grid on;
+
+fprintf('Pm = %.6f\n', Pm);
+
+modell = 'geschlossener_I_Regler';
+load_system(modell);
+
+fprintf('KI = %.3f\n', KI);
+
+modell = 'krit_geschlossener_I_Regler';
+load_system(modell);
+
+fprintf('KI_krit = %.3f\n', KI_krit);
