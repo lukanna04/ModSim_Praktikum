@@ -38,7 +38,7 @@ Ta = 0.015;
 KM = 1/63000;
 
 KI = 0.224;
-KI_krit = 2.21;
+KI_krit = 1.1445;
 
 % Parameter der linearen Übertragungsfunktion
 fprintf('Berechnete Werte \n');
