@@ -1,3 +1,8 @@
+%%
+% ModSim Praktikum 2 Aufgabe 2: Implementierung des 
+% linearen zeitdiskreten Streckenmodells
+% Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
+
 clear; clc;
 
 % Leistungsstufe
@@ -50,6 +55,8 @@ fprintf('a3 = %g\n', a3);
 
 fprintf('\n');
 
+% Normierung, sodass a3 = 1 ist, wie in MATLAB-Ausgabe
+
 fprintf('Normierte Werte \n');
 
 K_F_nom = K_F / a3;
@@ -68,21 +75,28 @@ a3_nom = a3/a3;
 fprintf('a3_nom = %g\n', a3_nom);
 
 % Verifikation
-modell = 'Signalflussplan2';
+modell = 'Signalflussplan';
 load_system(modell);
 
 % Arbeitspunkt x = [0; 0], u = 0
 x0 = [0; 0; 0];
 u0 = 0;
 
+% Linearisierung
 [A, B, C, D] = linmod(modell, x0, u0);
+
 % Berechnung der Transitionsmatrix 
 Phi = expm(A*Ta);
+
 %Berechnung der diskreten Eingangsmatrix
 H = inv(A) * (Phi - eye(3)) * B;
 
+fprintf('\n');
+fprintf('Phi: \n');
 disp(Phi);
+fprintf('H: \n');
 disp(H);
+fprintf('C: \n');
 disp(C);
+fprintf('D: \n');
 disp(D);
-
