@@ -1,3 +1,8 @@
+%%
+% ModSim Praktikum 2 Aufgabe 3: Reglerauslegung und Simulation 
+% mit dem linearen Modell
+% Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
+
 clear; clc;
 
 % Leistungsstufe
@@ -31,6 +36,16 @@ mg  = m_g;        % Alias
 c_p = 75e6;
 cp  = c_p;        % Alias
 
+% Abtastrzeit
+Ta = 0.015;
+
+%Messglied
+KM = 1/63000;
+
+% Regelverstärkung
+KI = 0.224;
+KI_krit = 1.1445;
+
 % Parameter der linearen Übertragungsfunktion
 fprintf('Berechnete Werte \n');
 K_F = K_L * K_sv * b1;
@@ -46,6 +61,8 @@ a3 = m_g*b1/(c_p*c_o);
 fprintf('a3 = %g\n', a3);
 
 fprintf('\n');
+
+% Normierung, sodass a3 = 1 ist, wie in MATLAB-Ausgabe
 
 fprintf('Normierte Werte \n');
 
@@ -65,30 +82,51 @@ a3_nom = a3/a3;
 fprintf('a3_nom = %g\n', a3_nom);
 
 % Verifikation
-modell = 'Signalflussplan2';
+modell = 'Signalflussplan';
 load_system(modell);
 
 % Arbeitspunkt x = [0; 0], u = 0
 x0 = [0; 0; 0];
 u0 = 0;
 
+% Linearisierung
 [A, B, C, D] = linmod(modell, x0, u0);
 
-[b, a] = ss2tf(A, B, C, D);
+% Berechnung der Transitionsmatrix 
+Phi = expm(A*Ta);
+
+%Berechnung der diskreten Eingangsmatrix
+H = inv(A) * (Phi - eye(3)) * B;
 
 fprintf('\n');
+fprintf('Phi: \n');
+disp(Phi);
+fprintf('H: \n');
+disp(H);
 
-fprintf('Simulierte Werte \n');
+modell = 'I_Regler';
+load_system(modell);
 
-fprintf('b = %s\n', mat2str(b, 6));
-fprintf('a = %s\n', mat2str(a, 6));
+% Linearisierung
+[Aneu, Bneu, Cneu, Dneu] = dlinmod(modell, Ta);
 
-fprintf('\n');
+sys = ss(Aneu, Bneu, Cneu, Dneu, Ta);
 
-fprintf('Simulierte Parameter \n');
+% Bodediagramm
+[mag, phase, w] = bode(sys);
 
-fprintf('K_F = %g\n', b(4));
-fprintf('a3 = %g\n', a(1));
-fprintf('a2 = %g\n', a(2));
-fprintf('a1 = %g\n', a(3));
-fprintf('a0 = %g\n', a(4));
+% Berechnung von Phasenreserve
+[Gm, Pm, wcg, wcp] = margin(mag, phase, w);
+
+bode(sys);
+
+grid on;
+
+% Phasenreserve
+fprintf('Pm = %.6f\n', Pm);
+
+% Regelverstärkung
+fprintf('KI = %.3f\n', KI);
+
+% Kritische Regelverstärkung
+fprintf('KI_krit = %.3f\n', KI_krit);

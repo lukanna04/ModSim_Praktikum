@@ -81,21 +81,25 @@ load_system(modell);
 x0 = [0; 0; 0];
 u0 = 0;
 
+% Linearisierung
 [A, B, C, D] = linmod(modell, x0, u0);
 
+% Berechnung der Transitionsmatrix 
 Phi = expm(A*Ta);
 
+%Berechnung der diskreten Eingangsmatrix
 H = inv(A) * (Phi - eye(3)) * B;
 
+fprintf('\n');
+fprintf('Phi: \n');
 disp(Phi);
+fprintf('H: \n');
 disp(H);
-
-modell = 'Signalflussplan2';
-load_system(modell);
 
 modell = 'I_Regler';
 load_system(modell);
 
+% Linearisierung
 [Aneu, Bneu, Cneu, Dneu] = dlinmod(modell, Ta);
 
 sys = ss(Aneu, Bneu, Cneu, Dneu, Ta);
