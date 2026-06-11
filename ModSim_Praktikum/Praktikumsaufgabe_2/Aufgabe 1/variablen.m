@@ -1,4 +1,8 @@
-%% 
+%%
+% ModSim Praktikum 2 Aufgabe 1: Implementierung des nichtlinearen 
+% kontinuierlichen Streckenmodells
+% Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
+
 clear; clc;
 
 % Leistungsstufe
@@ -48,9 +52,11 @@ fprintf('a3 = %g\n', a3);
 
 fprintf('\n');
 
+% Normierung, sodass a3 = 1 ist, wie in MATLAB-Ausgabe
+
 fprintf('Normierte Werte \n');
 
-K_F_nom = K_F / a3; % Normierung, sodass a3 = 1 ist, wie in MATLAB-Ausgabe
+K_F_nom = K_F / a3; 
 fprintf('K_F_nom = %g\n', K_F_nom);
 
 a0_nom = 1/a3;
@@ -73,12 +79,15 @@ load_system(modell);
 x0 = [0; 0; 0];
 u0 = 0;
 
+% Linearisierung
 [A, B, C, D] = linmod(modell, x0, u0);
 
+% Überatragungsfunktion
 [b, a] = ss2tf(A, B, C, D);
 
 fprintf('\n');
 
+% Simulierte Werte
 fprintf('Simulierte Werte \n');
 
 fprintf('b = %s\n', mat2str(b, 6));
@@ -88,6 +97,7 @@ fprintf('\n');
 
 fprintf('Simulierte Parameter \n');
 
+% Einzelne Koeffizienten
 fprintf('K_F = %g\n', b(4));
 fprintf('a3 = %g\n', a(1));
 fprintf('a2 = %g\n', a(2));
