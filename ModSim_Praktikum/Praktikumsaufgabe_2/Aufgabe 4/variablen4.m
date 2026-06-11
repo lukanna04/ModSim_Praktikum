@@ -1,3 +1,8 @@
+%%
+% ModSim Praktikum 2 Aufgabe 4: Experimentation mit dem nichtlinearen 
+% kontinuierlichen Modell
+% Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
+
 clear; clc;
 
 % Leistungsstufe
@@ -37,5 +42,5 @@ Ta = 0.015;
 %Messglied
 KM = 1/63000;
 
+% Regelverstärkung
 KI = 0.224;
-KI_krit = 1.1445;
