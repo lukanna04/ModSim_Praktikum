@@ -1,0 +1,6 @@
+
+# Simulink Artefakte
+*.slxc
+*.slxp
+*.asv
+slprj/

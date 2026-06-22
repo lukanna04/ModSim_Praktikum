@@ -37,8 +37,8 @@ Ta = 0.015;
 %Messglied
 KM = 1/63000;
 
-KI = 0.224;
-KI_krit = 1.1445;
+KI = 0.276;
+KI_krit = 2.21;
 
 % Parameter der linearen Übertragungsfunktion
 fprintf('Berechnete Werte \n');
@@ -81,29 +81,29 @@ load_system(modell);
 x0 = [0; 0; 0; 0];
 u0 = 0;
 
+<<<<<<< HEAD:ModSim_Praktikum/Praktikumsaufgabe_2/Aufgabe 3/variablen2.asv
 <<<<<<<< HEAD:ModSim_Praktikum/Praktikumsaufgabe_2/Aufgabe 3/variablen2.asv
 % Linearisierung
+=======
+>>>>>>> 24479ed948063e615840fe1816f374bf19016fb1:ModSim_Praktikum/Praktikumsaufgabe_2/variablen2.m
 [A, B, C, D] = linmod(modell, x0, u0);
 ========
 [A, B, C, D] = dlinmod(modell, x0, u0);
 >>>>>>>> fde39bd (Aufbau System Aufgabe 4):ModSim_Praktikum/Praktikumsaufgabe_2/variablen4.m
 
-% Berechnung der Transitionsmatrix 
 Phi = expm(A*Ta);
 
-%Berechnung der diskreten Eingangsmatrix
 H = inv(A) * (Phi - eye(3)) * B;
 
-fprintf('\n');
-fprintf('Phi: \n');
 disp(Phi);
-fprintf('H: \n');
 disp(H);
+
+modell = 'Signalflussplan2';
+load_system(modell);
 
 modell = 'I_Regler';
 load_system(modell);
 
-% Linearisierung
 [Aneu, Bneu, Cneu, Dneu] = dlinmod(modell, Ta);
 
 sys = ss(Aneu, Bneu, Cneu, Dneu, Ta);
@@ -127,3 +127,7 @@ modell = 'krit_geschlossener_I_Regler';
 load_system(modell);
 
 fprintf('KI_krit = %.3f\n', KI_krit);
+
+
+modell = 'Signalflussplan4';
+load_system(modell);
