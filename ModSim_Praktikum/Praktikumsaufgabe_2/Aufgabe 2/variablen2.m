@@ -1,3 +1,8 @@
+%%
+% ModSim Praktikum 2 Aufgabe 2: Implementierung des 
+% linearen zeitdiskreten Streckenmodells
+% Gruppe 2: Johanna Krüger, Arne Noack, Viktor Strichow, Louise Perrin
+
 clear; clc;
 
 % Leistungsstufe
@@ -31,6 +36,9 @@ mg  = m_g;        % Alias
 c_p = 75e6;
 cp  = c_p;        % Alias
 
+% Abtastzeit
+Ta = 0.015;
+
 % Parameter der linearen Übertragungsfunktion
 fprintf('Berechnete Werte \n');
 K_F = K_L * K_sv * b1;
@@ -46,6 +54,8 @@ a3 = m_g*b1/(c_p*c_o);
 fprintf('a3 = %g\n', a3);
 
 fprintf('\n');
+
+% Normierung, sodass a3 = 1 ist, wie in MATLAB-Ausgabe
 
 fprintf('Normierte Werte \n');
 
@@ -65,30 +75,28 @@ a3_nom = a3/a3;
 fprintf('a3_nom = %g\n', a3_nom);
 
 % Verifikation
-modell = 'Signalflussplan2';
+modell = 'Signalflussplan';
 load_system(modell);
 
 % Arbeitspunkt x = [0; 0], u = 0
 x0 = [0; 0; 0];
 u0 = 0;
 
+% Linearisierung
 [A, B, C, D] = linmod(modell, x0, u0);
 
-[b, a] = ss2tf(A, B, C, D);
+% Berechnung der Transitionsmatrix 
+Phi = expm(A*Ta);
+
+%Berechnung der diskreten Eingangsmatrix
+H = inv(A) * (Phi - eye(3)) * B;
 
 fprintf('\n');
-
-fprintf('Simulierte Werte \n');
-
-fprintf('b = %s\n', mat2str(b, 6));
-fprintf('a = %s\n', mat2str(a, 6));
-
-fprintf('\n');
-
-fprintf('Simulierte Parameter \n');
-
-fprintf('K_F = %g\n', b(4));
-fprintf('a3 = %g\n', a(1));
-fprintf('a2 = %g\n', a(2));
-fprintf('a1 = %g\n', a(3));
-fprintf('a0 = %g\n', a(4));
+fprintf('Phi: \n');
+disp(Phi);
+fprintf('H: \n');
+disp(H);
+fprintf('C: \n');
+disp(C);
+fprintf('D: \n');
+disp(D);
